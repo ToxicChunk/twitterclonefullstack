@@ -27,7 +27,7 @@ This is a fullstack mini Twitter clone built using React for the frontend and Fl
 
 ## How to Run
 
-### Backend
+Backend
 
 ```bash
 cd backend
@@ -37,6 +37,7 @@ pip install flask flask-cors
 python init_db.py          # Creates database schema
 python load_json.py        # Loads tweets into DB
 python main.py             # Launches backend on http://127.0.0.1:5000
+
 
 
 Frontend Setup
