@@ -1,5 +1,7 @@
+// top import & logic unchanged
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
+import './App.css';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -47,7 +49,7 @@ function App() {
     if (!username || !password) return alert("⚠️ Fill in both fields.");
     const res = await fetch(`${API}/login`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
     });
     const data = await res.json();
@@ -131,13 +133,28 @@ function App() {
   const textColor = darkMode ? 'white' : 'black';
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: appBackground }}>
+    <div style={{ minHeight: '100vh', backgroundColor: appBackground, paddingBottom: '50px' }}>
       <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
 
+      {/* TOP BANNER */}
+      <div style={{ width: '100%', maxHeight: '300px', overflow: 'hidden' }}>
+        <img
+          src="/thumb-1920-28183.png"
+          alt="Top Banner"
+          style={{
+            width: '100%',
+            objectFit: 'cover',
+            display: 'block',
+            maxHeight: '300px'
+          }}
+        />
+      </div>
+
+      {/* MAIN CONTENT */}
       <div style={{
         width: '100%',
         maxWidth: '600px',
-        margin: '30px auto',
+        margin: '40px auto',
         backgroundColor: cardBackground,
         padding: '30px',
         borderRadius: '12px',
@@ -146,7 +163,6 @@ function App() {
         color: textColor
       }}>
 
-        {/* Your login/signup area */}
         {!loggedInUser ? (
           <div>
             <input placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} style={{ width: '100%', padding: '8px', marginBottom: '5px' }} />
@@ -160,11 +176,9 @@ function App() {
           <div>
             <p>👤 Logged in as <strong>@{loggedInUser.username}</strong></p>
             <button onClick={handleLogout} style={buttonStyle}>Log out</button>
-            <button style={{ ...buttonStyle, backgroundColor: 'grey', marginLeft: '10px' }}>Profile (Coming Soon)</button>
           </div>
         )}
 
-        {/* Tweet form */}
         {loggedInUser && (
           <form onSubmit={handleSubmit}>
             <textarea placeholder="What's happening?" value={newPost} onChange={(e) => setNewPost(e.target.value)} style={{ width: '100%', padding: '10px', marginTop: '15px' }} />
@@ -172,7 +186,6 @@ function App() {
           </form>
         )}
 
-        {/* Search and display tweets */}
         <form onSubmit={handleSearch}>
           <input placeholder="Search tweets" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} style={{ width: '100%', padding: '10px', marginTop: '20px' }} />
           <button type="submit" style={buttonStyle}>Search Tweets</button>
@@ -195,7 +208,6 @@ function App() {
           </div>
         )}
 
-        {/* Search and display users */}
         <form onSubmit={handleUserSearch}>
           <input placeholder="Search users" value={userQuery} onChange={(e) => setUserQuery(e.target.value)} style={{ width: '100%', padding: '10px', marginTop: '20px' }} />
           <button type="submit" style={buttonStyle}>Search Users</button>
@@ -224,7 +236,6 @@ function App() {
           </div>
         )}
 
-        {/* All Tweets */}
         <div>
           <h3 style={{ marginTop: '30px' }}>📰 All Tweets</h3>
           {posts.map(post => (
